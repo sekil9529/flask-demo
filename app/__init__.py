@@ -31,7 +31,7 @@ def create_app(env: Optional[str] = None) -> Flask:
     # 注册Request中间件
     register_request_middleware(app)
     # 注册WSGI中间件
-    register_wsgi_middleware(app)
+    # register_wsgi_middleware(app)
     # 注册异常处理
     register_exception_handler(app)
     # 注册蓝图
