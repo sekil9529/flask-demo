@@ -9,7 +9,7 @@ from flask import Response, request
 
 from .base import BaseRequestMiddleware
 
-log = logging.getLogger()
+log = logging.getLogger(__name__)
 
 
 class TimerMiddleware(BaseRequestMiddleware):

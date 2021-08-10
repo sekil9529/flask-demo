@@ -22,6 +22,7 @@ def create_app(env: Optional[str] = None) -> Flask:
     # 配置日志
     dictConfig(settings.LOGGING)
 
+    # Request扩展
     Flask.request_class = ExtRequest
     # JSONEncoder扩展
     Flask.json_encoder = ExtJSONEncoder
