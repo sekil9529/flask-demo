@@ -4,7 +4,8 @@ import time
 import logging
 from typing import Optional, Generator
 from contextlib import contextmanager
-from flask import Response
+
+from flask import Response, request
 
 from .base import BaseRequestMiddleware
 
@@ -41,4 +42,20 @@ class TimerMiddleware(BaseRequestMiddleware):
                     log.warning('response timeout: %.6f' % diff)
                 # else:
                 #     log.info('response time: %.6f' % diff)
+        return response
+
+
+class NewTimerMiddleware(BaseRequestMiddleware):
+
+    key: str = 'start_time'
+    threshold: float = 1.0
+
+    def before_request(self):
+        setattr(request.ext, self.key, time.time())
+
+    def after_request(self, response: Response) -> Response:
+        if hasattr(request.ext, self.key):
+            diff = time.time() - getattr(request.ext, self.key)
+            if diff > self.threshold:
+                log.warning('response timeout: %.6f' % diff)
         return response
