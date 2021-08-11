@@ -1,8 +1,8 @@
 # coding: utf-8
 
-from .timer import TimerMiddleware, NewTimerMiddleware
+from .timer import TimerMiddleware, NewTimerMiddleware, ContextVarTimerMiddleware
 
 
 REQUEST_MIDDLEWARE_TUPLE = (
-    NewTimerMiddleware,
+    ContextVarTimerMiddleware,
 )
