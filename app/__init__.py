@@ -8,7 +8,7 @@ from flask import Flask
 from flask_cors import CORS
 from flask_apidoc import ApiDoc
 
-from core.request import ExtRequest
+# from core.request import ExtRequest
 from core.response import ExtJSONEncoder
 from settings import get_settings
 
@@ -22,8 +22,8 @@ def create_app(env: Optional[str] = None) -> Flask:
     # 配置日志
     dictConfig(settings.LOGGING)
 
-    # Request扩展
-    Flask.request_class = ExtRequest
+    # # Request扩展
+    # Flask.request_class = ExtRequest
     # JSONEncoder扩展
     Flask.json_encoder = ExtJSONEncoder
 
