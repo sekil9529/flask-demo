@@ -69,6 +69,8 @@ _TIME_VAR = ContextVar('time')
 class ContextVarTimerMiddleware(BaseRequestMiddleware):
     """计时器中间件"""
 
+    threshold: float = 1.0
+
     def before_request(self):
         _TIME_VAR.set(time.time())
 
