@@ -2,18 +2,16 @@
 
 import time
 import logging
-from typing import Optional, Generator
-from contextlib import contextmanager
 from contextvars import ContextVar
 
 from flask import Response
 
 from .base import BaseRequestMiddleware
 
-log = logging.getLogger(__name__)
+log: logging.Logger = logging.getLogger(__name__)
 
 # 上下文变量
-_TIME_VAR = ContextVar('time')
+_TIME_VAR: ContextVar = ContextVar('time')
 
 
 class TimerMiddleware(BaseRequestMiddleware):
