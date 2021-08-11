@@ -44,38 +44,3 @@ class TimerMiddleware(BaseRequestMiddleware):
                 # else:
                 #     log.info('response time: %.6f' % diff)
         return response
-
-
-class NewTimerMiddleware(BaseRequestMiddleware):
-    """计时器中间件"""
-
-    key: str = 'start_time'
-    threshold: float = 1.0
-
-    def before_request(self):
-        setattr(request.ext, self.key, time.time())
-
-    def after_request(self, response: Response) -> Response:
-        if hasattr(request.ext, self.key):
-            diff = time.time() - getattr(request.ext, self.key)
-            if diff > self.threshold:
-                log.warning('response timeout: %.6f' % diff)
-        return response
-
-
-_TIME_VAR = ContextVar('time')
-
-
-class ContextVarTimerMiddleware(BaseRequestMiddleware):
-    """计时器中间件"""
-
-    threshold: float = 1.0
-
-    def before_request(self):
-        _TIME_VAR.set(time.time())
-
-    def after_request(self, response: Response) -> Response:
-        diff = time.time() - _TIME_VAR.get()
-        if diff > self.threshold:
-            log.warning('response timeout: %.6f' % diff)
-        return response
