@@ -1,23 +1,23 @@
 # coding: utf-8
 
-import logging
-from typing import Type
+from __future__ import annotations
 
 from flask import Response
 
+from libs.logger import LoggerProxy
 from .base import BaseExcHandler
 from core.response import response_fail
 
-log = logging.getLogger()
+logger: LoggerProxy = LoggerProxy(__name__)
 
 
 class UnknownExcHandler(BaseExcHandler):
     """未知异常处理"""
 
     @property
-    def exception(self) -> Type[Exception]:
+    def exception(self) -> type[Exception]:
         return Exception
 
     def handle(self, exception: Exception) -> Response:
-        log.exception(exception)
+        logger.exception(exception)
         return response_fail()

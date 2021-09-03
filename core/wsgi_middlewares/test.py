@@ -1,14 +1,11 @@
 # coding: utf-8
 
-import time
-import logging
-
-from flask import Response
 from werkzeug.wsgi import ClosingIterator
 
+from libs.logger import LoggerProxy
 from .base import BaseWSGIMiddleware
 
-log = logging.getLogger(__name__)
+logger = LoggerProxy(__name__)
 
 
 class TestMiddleware(BaseWSGIMiddleware):

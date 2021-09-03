@@ -16,7 +16,7 @@ class BaseRequestMiddleware(metaclass=abc.ABCMeta):
     __slots__ = ()
 
     @abc.abstractmethod
-    def before_request(self):
+    def before_request(self) -> None:
         """请求前"""
         pass
 

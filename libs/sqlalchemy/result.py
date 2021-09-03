@@ -1,6 +1,7 @@
 # coding: utf-8
 
-from typing import Union, List
+from __future__ import annotations
+from typing import Union
 from sqlalchemy.engine.row import Row
 
 from . import Base
@@ -23,7 +24,7 @@ def row_format(result: Row) -> dict:
     return ExtDict(zip(result.keys(), result))
 
 
-def list_format(result: List[Union[Row, Union[Base, Model]]]) -> List[dict]:
+def list_format(result: list[Union[Row, Union[Base, Model]]]) -> list[dict]:
     """ 行数据列表格式化 """
     lst = []
     for items in result:
@@ -35,7 +36,7 @@ def list_format(result: List[Union[Row, Union[Base, Model]]]) -> List[dict]:
     return lst
 
 
-def result_format(result: Union[Union[Base, Model], Row, List, None]) -> Union[dict, List[dict]]:
+def result_format(result: Union[Union[Base, Model], Row, list, None]) -> Union[dict, list[dict]]:
     """ sqlalchemy query result 格式化 """
     if not result:
         return result

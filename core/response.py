@@ -1,6 +1,7 @@
 # coding: utf-8
 
-from typing import Any, Dict, Optional
+from __future__ import annotations
+from typing import Any, Optional
 from datetime import datetime, date
 
 from flask import jsonify, Response
@@ -30,7 +31,7 @@ def response_ok(data: Any = None) -> Response:
     # 错误码
     code: str = '0'
     # 内容
-    content: Dict[str, Any] = dict(code=code, data=data)
+    content: dict[str, Any] = dict(code=code, data=data)
     return jsonify(content)
 
 
@@ -52,7 +53,7 @@ def response_fail(
     # 错误信息
     message: str = enum.message
     # 内容
-    content: Dict[str, Any] = dict(code=code, error=error, message=message, desc=desc)
+    content: dict[str, Any] = dict(code=code, error=error, message=message, desc=desc)
     # 响应状态码
     status_code = 500 if code == '500' else 400
     response: Response = jsonify(content)
