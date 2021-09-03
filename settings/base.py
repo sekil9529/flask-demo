@@ -1,7 +1,8 @@
 # coding: utf-8
 
+from __future__ import annotations
+from typing import Any
 import os
-from typing import Dict
 
 from libs.config import Config
 
@@ -15,12 +16,12 @@ __all__ = (
 BASE_DIR: str = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # 日志文件路径
-LOG_PATH = os.path.join(BASE_DIR, 'logs')
+LOG_PATH: str = os.path.join(BASE_DIR, 'logs')
 if not os.path.exists(LOG_PATH):
     os.makedirs(LOG_PATH)
 
 # 配置文件路径
-CONFIG_INFO: str = Config(os.path.join(BASE_DIR, '.env')).format()
+CONFIG_INFO: dict[str, Any] = Config(os.path.join(BASE_DIR, '.env')).format()
 
 
 class BaseSettings:
@@ -35,10 +36,10 @@ class BaseSettings:
     SQLALCHEMY_POOL_SIZE: int  # 连接数
     SQLALCHEMY_MAX_OVERFLOW: int  # 可溢出的连接数
     SQLALCHEMY_POOL_RECYCLE: int  # 连接时长
-    SQLALCHEMY_ENGINE_OPTIONS: Dict = {}  # options
+    SQLALCHEMY_ENGINE_OPTIONS: dict[str, Any] = {}  # options
 
     # 日志配置
-    LOGGING: Dict = {
+    LOGGING: dict[str, Any] = {
         'version': 1,
         'disable_existing_loggers': True,
         'loggers': {

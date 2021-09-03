@@ -1,6 +1,7 @@
 # coding: utf-8
 
-from typing import Dict
+from __future__ import annotations
+from typing import Any
 from urllib.parse import quote_plus
 
 from .base import *
@@ -23,6 +24,6 @@ class Settings(BaseSettings):
     SQLALCHEMY_POOL_SIZE: int = 10  # 连接数
     SQLALCHEMY_MAX_OVERFLOW: int = 0  # 可溢出的连接数
     SQLALCHEMY_POOL_RECYCLE: int = 60 * 60 * 2  # 连接时长
-    SQLALCHEMY_ENGINE_OPTIONS: Dict = {
+    SQLALCHEMY_ENGINE_OPTIONS: dict[str, Any] = {
         'isolation_level': 'READ COMMITTED'  # RC隔离级别
     }

@@ -1,5 +1,6 @@
 # coding: utf-8
 
+import time
 from flask.views import MethodView
 from flask import request, Response
 
@@ -18,6 +19,8 @@ class UsersView(MethodView):
             where(User.is_deleted == 0).order_by(db.desc(User.create_time)). \
             offset((page - 1) * per_page).limit(per_page).all()
         result = result_format(result)
+        # 测试慢日志记录
+        time.sleep(1)
         return response_ok(result)
 
     # def post(self) -> Response:
